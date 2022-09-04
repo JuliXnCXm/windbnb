@@ -39,7 +39,7 @@ const useLocations = () => {
         totalGuests !== 0 ? totalGuests / 2 : 0
       );
     }
-    window.location = "/windbnbChallenge";
+    window.location.reload(false);
   }
 
   return {

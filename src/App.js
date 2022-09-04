@@ -9,15 +9,18 @@ function App() {
   const [choice, setChoice] = useState("Helsinki, Finland");
 
   useEffect(() => {
-    if (sessionStorage.getItem("rooms") || sessionStorage.getItem("rooms") !== undefined) {
-      setRooms(sessionStorage.getItem("rooms"))
+    if (window.sessionStorage.getItem("rooms") && window.sessionStorage.getItem("rooms") !== undefined) {
+      setRooms(window.sessionStorage.getItem("rooms"))
     } else {
       setRooms(0)
+      window.sessionStorage.setItem("rooms", 0)
+
     }
-    if (sessionStorage.getItem("query") || sessionStorage.getItem("query") !== undefined ){
+    if (window.sessionStorage.getItem("query") && window.sessionStorage.getItem("query") !== undefined ){
+      console.log("query");
       setChoice(sessionStorage.getItem("query"));
     } else {
-      sessionStorage.setItem("query",choice);
+      window.sessionStorage.setItem("query",choice);
     }
   }, [choice])
 
