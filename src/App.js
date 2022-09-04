@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from "react";
+import Header from './components/Header'
+import Stays from './components/Stays'
 
 function App() {
+
+  const [rooms, setRooms] = useState(0)
+  const [choice, setChoice] = useState("Helsinki, Finland");
+
+  useEffect(() => {
+    if (sessionStorage.getItem("rooms") || sessionStorage.getItem("rooms") !== undefined) {
+      setRooms(sessionStorage.getItem("rooms"))
+    } else {
+      setRooms(0)
+    }
+    if (sessionStorage.getItem("query") || sessionStorage.getItem("query") !== undefined ){
+      setChoice(sessionStorage.getItem("query"));
+    } else {
+      sessionStorage.setItem("query",choice);
+    }
+  }, [choice])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header choice={choice} />
+      <Stays rooms={rooms} choice={choice} />
     </div>
   );
 }
